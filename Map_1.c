@@ -16,7 +16,7 @@ struct vNode {
    VList       next; // link to next node
 };
 
-struct MapRep {
+struct MapRep { 
    int   nV;         // #vertices
    int   nE;         // #edges
    VList connections[NUM_MAP_LOCATIONS]; // array of lists
@@ -140,7 +140,10 @@ int numE(Map g, TransportID type)
 // Returns 0 if no direct connection (i.e. not adjacent in graph)
 int connections(Map g, LocationID start, LocationID end, TransportID type[])
 {
+   // check parameters
    assert(g != NULL);
+   // assert(g->connections[start] != NULL);
+   // assert(g->connections[end] != NULL);
 
    if (g->connections[start] == NULL) return 0;
 
