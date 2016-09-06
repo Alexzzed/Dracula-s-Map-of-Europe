@@ -141,8 +141,30 @@ int numE(Map g, TransportID type)
 int connections(Map g, LocationID start, LocationID end, TransportID type[])
 {
    assert(g != NULL);
-   // TODO: complete this fucntion
-   return 0;  // to keep the compiler happy
+
+   if (g->connections[start] == NULL) return 0;
+
+   int counter = 0;
+   VList curr = g->connections[start];
+
+   while (curr != NULL) {
+      if (curr->v == end) {
+         type[counter] = curr->type;
+         counter ++;
+      } else if (curr->type == BOAT) {
+         VList temp = g->connections[curr->v];
+         while (temp != NULL) {
+            if (temp->v == end) {
+               type[counter] = temp->type;
+               counter ++;
+            }
+            temp = temp->next;
+         }
+      }
+      curr = curr->next;
+   }
+
+   return counter;
 }
 
 // Add edges to Graph representing map of Europe
